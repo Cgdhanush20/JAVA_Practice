@@ -1,0 +1,30 @@
+public class Main {
+    public static void main(String[] args) {
+        String s1 = "12xy12";
+        String s2 = "xy";
+        int n1 = s1.length();
+        int n2 = s2.length();
+        StringBuilder r = new StringBuilder();
+
+        // Iterate through s1 with a sliding window of size s2
+        for (int i = 0; i < n1;) {
+            // Check if there's enough room for a window of size s2
+            if (i <= n1 - n2) {
+                String window = s1.substring(i, i + n2);
+                if (window.equals(s2)) {
+                    r.append(s2);  // Append matching part
+                    i += n2;  // Move forward by length of s2
+                } else {
+                    r.append("+");  // Append + if it doesn't match
+                    i++;  // Move forward by 1
+                }
+            } else {
+                // If the remaining part is smaller than s2, append the appropriate number of +
+                r.append("+");
+                i++;
+            }
+        }
+
+        System.out.println(r);
+    }
+}
